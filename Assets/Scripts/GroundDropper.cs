@@ -14,23 +14,34 @@ namespace WeenieWalker
         [SerializeField] private float _timingRange;
         [SerializeField] private Animator _anim;
 
+        [Tooltip("Use this to identify how far down the block will fall")]
+        [SerializeField] private float _dropAmount = 4f;
+
         private float _selectedTiming;
         private WaitForSeconds _yieldWait;
+        private Vector3 startPos;
 
         private void OnEnable()
         {
-            _selectedTiming = Random.Range(0, _timingRange);
-            _yieldWait = new WaitForSeconds(_groundDefaultDropAmount + _selectedTiming);
+            GameManager.OnResetLevel += Reset;
         }
 
         private void OnDisable()
         {
-            
+            GameManager.OnResetLevel -= Reset;
         }
 
         private void Start()
         {
-            //StartCoroutine(DropRoutine()); 
+            startPos = this.transform.position;
+            RandomizeDropTime();
+        }
+
+        private void RandomizeDropTime()
+        {
+            _selectedTiming = Random.Range(0, _timingRange);
+            _yieldWait = new WaitForSeconds(_groundDefaultDropAmount + _selectedTiming);
+            
             Invoke("StartAnimation", _groundDefaultDropAmount + _selectedTiming);
         }
 
@@ -53,7 +64,15 @@ namespace WeenieWalker
         /// </summary>
         public void Drop()
         {
-            transform.Translate(Vector3.down * 4);
+            transform.Translate(Vector3.down * _dropAmount);
+        }
+
+        private void Reset()
+        {
+            Debug.Log("Cube needs to go back");
+            transform.position = startPos;
+
+            RandomizeDropTime();
         }
     }
 }

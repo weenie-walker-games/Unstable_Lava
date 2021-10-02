@@ -7,13 +7,13 @@ namespace WeenieWalker
     public class Switch : InteractableItems
     {
 
-        public Collider coll;
         [SerializeField] Color _usedColor = Color.black;
 
         [SerializeField] private Renderer _rend;
         [SerializeField] private Animator _anim;
 
         private Color _startColor;
+        
 
         private void Start()
         {
@@ -28,13 +28,10 @@ namespace WeenieWalker
         protected override void DoOtherInteractionEffects()
         {
             _anim.SetTrigger("Interact");
-            ChangeColor(_usedColor);
+            Color toColor = _isUsedDuringReversible ?  _startColor : _usedColor;
+            ChangeColor(toColor);
 
-            if(_interactionType == InteractType.Reversible)
-            {
-                coll.enabled = false;
-                coll.enabled = true;
-            }
+
         }
         
         protected override void DoOtherResetEffects()

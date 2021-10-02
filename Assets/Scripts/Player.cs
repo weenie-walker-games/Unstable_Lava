@@ -28,12 +28,12 @@ namespace WeenieWalker
 
         private void OnEnable()
         {
-            
+            LevelManager.OnResetPlayerPosition += Reset;
         }
 
         private void OnDisable()
         {
-            
+            LevelManager.OnResetPlayerPosition -= Reset;
         }
 
         private void Start()
@@ -43,15 +43,8 @@ namespace WeenieWalker
 
         private void Update()
         {
-
-
             Move();
             Jump();
-
-
-
-
-
         }
 
         private void Move()
@@ -90,10 +83,16 @@ namespace WeenieWalker
             _velocity.y += _fallMultiplier * _gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
 
-
-
         }
 
+
+        private void Reset(Transform startPos)
+        {
+            _controller.enabled = false;
+            transform.position = startPos.position;
+            transform.rotation = startPos.rotation;
+            _controller.enabled = true;
+        }
 
     }
 }

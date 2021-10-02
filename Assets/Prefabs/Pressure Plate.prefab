@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactables: []
-  _type: 0
+  _interactionType: 0
+  _timerCooldown: 5
+  _collider: {fileID: 7029342906893353216}
   _usedColor: {r: 0, g: 0, b: 0, a: 1}
   _rend: {fileID: 7029342906893353217}

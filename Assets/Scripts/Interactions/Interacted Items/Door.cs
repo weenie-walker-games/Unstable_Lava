@@ -8,16 +8,21 @@ namespace WeenieWalker
     {
 
         [SerializeField] private Animator _anim;
-
+        private bool _isOpen = false;
 
         public override void Interact()
         {
             _anim.SetTrigger("Interact");
+            _isOpen = !_isOpen;
         }
 
         public override void Reset()
         {
-            _anim.SetTrigger("Interact");
+            if (_isOpen)
+            {
+                _anim.SetTrigger("Interact");
+                _isOpen = false;
+            }
         }
     }
 }

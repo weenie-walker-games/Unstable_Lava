@@ -20,12 +20,18 @@ namespace WeenieWalker
         protected override void DoOtherInteractionEffects()
         {
 
-            _rend.material.color = _usedColor;
+            Color toColor = _isUsedDuringReversible ? _startColor : _usedColor;
+            ChangeColor(toColor);
         }
 
         protected override void DoOtherResetEffects()
         {
-            _rend.material.color = _startColor;
+            ChangeColor(_startColor);
+        }
+
+        private void ChangeColor(Color color)
+        {
+            _rend.material.color = color;
         }
 
     }

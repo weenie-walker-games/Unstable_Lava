@@ -11,20 +11,21 @@ namespace WeenieWalker
         [SerializeField] protected List<InteractedItems> interactables = new List<InteractedItems>();
         [SerializeField] protected InteractType _interactionType;
         [SerializeField] protected float _timerCooldown = 5f;
+        [SerializeField] protected Collider _collider;
 
         protected bool _hasBeenTriggered = false;       //for one time use objects
         protected bool _isPlayerInRange = false;        //to store if player is close enough to interact
         private Coroutine _listenForInput;
-
+        protected bool _isUsedDuringReversible = false;
 
         protected virtual void OnEnable()
         {
-            
+            GameManager.OnResetLevel += Reset;
         }
 
         protected virtual void OnDisable()
         {
-            
+            GameManager.OnResetLevel -= Reset;
         }
         
 
@@ -45,7 +46,9 @@ namespace WeenieWalker
                 case InteractType.Reversible:
                     //Reset the input listener
                     _hasBeenTriggered = false;
-                    //StartListening();
+                    _isUsedDuringReversible = !_isUsedDuringReversible; 
+                    _collider.enabled = false;
+                    _collider.enabled = true;
                     break;
                 default:
                     break;
@@ -54,9 +57,12 @@ namespace WeenieWalker
 
         public virtual void Reset()
         {
-            interactables.ForEach(t => t?.Interact());
-            _hasBeenTriggered = false;
-            DoOtherResetEffects();
+            if (_hasBeenTriggered)
+            {
+                interactables.ForEach(t => t?.Interact());
+                _hasBeenTriggered = false;
+                DoOtherResetEffects();
+            }
         }
 
 
