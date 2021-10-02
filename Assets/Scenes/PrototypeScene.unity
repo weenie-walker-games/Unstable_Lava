@@ -676,6 +676,12 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!135 &1031561443 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2551921833911676354, guid: ef28deb118d007448a5019828311b839,
+    type: 3}
+  m_PrefabInstance: {fileID: 2551921833671798117}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1219498160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1035,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
+        type: 3}
+      propertyPath: coll
+      value: 
+      objectReference: {fileID: 1031561443}
+    - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
+        type: 3}
+      propertyPath: _usedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
+        type: 3}
+      propertyPath: _usedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
+        type: 3}
+      propertyPath: _usedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
+        type: 3}
+      propertyPath: _interactionType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2551921833911676353, guid: ef28deb118d007448a5019828311b839,
         type: 3}
       propertyPath: interactables.Array.size

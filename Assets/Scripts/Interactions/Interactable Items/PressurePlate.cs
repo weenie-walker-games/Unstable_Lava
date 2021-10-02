@@ -8,23 +8,24 @@ namespace WeenieWalker
     {
         [SerializeField] Color _usedColor = Color.black;
 
-        private Renderer _rend;
+        [SerializeField] private Renderer _rend;
+
+        private Color _startColor;
 
         private void Start()
         {
-            _rend = GetComponent<Renderer>();
+            _startColor = _rend.material.color;
         }
 
         protected override void DoOtherInteractionEffects()
         {
-            try
-            {
-                _rend.material.color = _usedColor;
-            }
-            catch
-            {
-                Debug.LogError($"There is no Renderer component assigned for {this.name}");
-            }
+
+            _rend.material.color = _usedColor;
+        }
+
+        protected override void DoOtherResetEffects()
+        {
+            _rend.material.color = _startColor;
         }
 
     }

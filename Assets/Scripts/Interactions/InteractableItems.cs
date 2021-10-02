@@ -8,7 +8,9 @@ namespace WeenieWalker
     public abstract class InteractableItems : MonoBehaviour, IInteractable
     {
 
-        [SerializeField] List<InteractedItems> interactables = new List<InteractedItems>();
+        [SerializeField] protected List<InteractedItems> interactables = new List<InteractedItems>();
+        [SerializeField] protected InteractType _interactionType;
+        [SerializeField] protected float _timerCooldown = 5f;
 
         protected bool _hasBeenTriggered = false;       //for one time use objects
         protected bool _isPlayerInRange = false;        //to store if player is close enough to interact
@@ -30,6 +32,31 @@ namespace WeenieWalker
         {
             interactables.ForEach(t => t?.Interact());
             DoOtherInteractionEffects();
+
+            //Setup what to do next
+            switch (_interactionType)
+            {
+                case InteractType.SingleUse:
+                    _hasBeenTriggered = true;
+                    break;
+                case InteractType.Timed:
+                    Invoke("Reset", _timerCooldown);
+                    break;
+                case InteractType.Reversible:
+                    //Reset the input listener
+                    _hasBeenTriggered = false;
+                    //StartListening();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public virtual void Reset()
+        {
+            interactables.ForEach(t => t?.Interact());
+            _hasBeenTriggered = false;
+            DoOtherResetEffects();
         }
 
 
@@ -39,13 +66,22 @@ namespace WeenieWalker
             if (other.gameObject.CompareTag("Player"))
             {
                 _isPlayerInRange = true;
+                StartListening();
 
+            }
+        }
+
+        private void StartListening()
+        {
+            if (_isPlayerInRange)
+            {
                 //start coroutine to listen for button press
                 if (!_hasBeenTriggered)
                 {
                     _listenForInput = StartCoroutine(ListenForButtonPress());
                 }
             }
+
         }
 
         IEnumerator ListenForButtonPress()
@@ -55,7 +91,6 @@ namespace WeenieWalker
                 if (Input.GetButtonDown("Interact"))
                 {
                     Interact();
-                    _hasBeenTriggered = true;
                     StopCoroutine(_listenForInput);
                 }
 
@@ -72,7 +107,10 @@ namespace WeenieWalker
             }
         }
 
+
+
         protected abstract void DoOtherInteractionEffects();
+        protected abstract void DoOtherResetEffects();
 
     }
 }

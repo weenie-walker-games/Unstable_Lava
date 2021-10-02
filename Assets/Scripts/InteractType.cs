@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace WeenieWalker
 {
-    public interface IInteractable
+    public enum InteractType
     {
-        void Interact();
-        void Reset();
+        SingleUse,
+        Timed,
+        Reversible
     }
 }
