@@ -12,7 +12,7 @@ namespace WeenieWalker
         [Tooltip("Select a higher end to the random drop timing variable. This will be the random amount that will be added to the default value before dropping the ground piece.")]
         [Range(0, 20)]
         [SerializeField] private float _timingRange;
-        [SerializeField] 
+        [SerializeField] private Animator _anim;
 
         private float _selectedTiming;
         private WaitForSeconds _yieldWait;
@@ -30,7 +30,13 @@ namespace WeenieWalker
 
         private void Start()
         {
-            StartCoroutine(DropRoutine()); 
+            //StartCoroutine(DropRoutine()); 
+            Invoke("StartAnimation", _groundDefaultDropAmount + _selectedTiming);
+        }
+
+        private void StartAnimation()
+        {
+            _anim.SetTrigger("Shake");
         }
 
         IEnumerator DropRoutine()
@@ -38,10 +44,16 @@ namespace WeenieWalker
 
             yield return _yieldWait;
 
-            //Drop
-            transform.Translate(Vector3.down * 4);
+            _anim.SetTrigger("Shake");
         }
 
 
+        /// <summary>
+        /// Called via the animation
+        /// </summary>
+        public void Drop()
+        {
+            transform.Translate(Vector3.down * 4);
+        }
     }
 }

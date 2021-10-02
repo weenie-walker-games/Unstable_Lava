@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6111753936641571940}
   - component: {fileID: 6111753936641571939}
   - component: {fileID: 6111753936641571938}
+  - component: {fileID: 1252253758417444107}
   m_Layer: 0
   m_Name: GroundCube
   m_TagString: Ground
@@ -106,6 +107,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285ba8ea772588247b8bdab78a2b20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundDefaultDropAmount: 30
+  _groundDefaultDropAmount: 2
   _timingRange: 5
-  _selectedTiming: 0
+  _anim: {fileID: 1252253758417444107}
+--- !u!95 &1252253758417444107
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6111753936641571937}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bd206abca38b5444a19fe163ec61b65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

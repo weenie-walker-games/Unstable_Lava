@@ -8,6 +8,7 @@ namespace WeenieWalker
     {
         [SerializeField] private GameObject _groundPrefab;
         [SerializeField] private Vector2 _groundDimensions;
+        [SerializeField] private float _sizeMultiplier = 3f;
 
         private void OnEnable()
         {
@@ -29,6 +30,9 @@ namespace WeenieWalker
                     Instantiate(_groundPrefab, new Vector3(i, 0, j), Quaternion.identity, this.transform);
                 }
             }
+
+            //Resize the parent
+            this.transform.localScale *= _sizeMultiplier;
         }
     }
 }
