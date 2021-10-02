@@ -13,7 +13,7 @@ namespace WeenieWalker
         [SerializeField] private Animator _anim;
 
         private Color _startColor;
-        
+        private bool _isActive = false;
 
         private void Start()
         {
@@ -27,8 +27,9 @@ namespace WeenieWalker
 
         protected override void DoOtherInteractionEffects()
         {
+            _isActive = !_isActive;
             _anim.SetTrigger("Interact");
-            Color toColor = _isUsedDuringReversible ?  _startColor : _usedColor;
+            Color toColor = _isActive ?  _usedColor : _startColor;
             ChangeColor(toColor);
 
 

@@ -12,12 +12,16 @@ namespace WeenieWalker
         [SerializeField] protected float _waitTimeAtLocation = 2f;
         [Tooltip("The time it takes the platform to reach the next location")]
         [SerializeField] protected float _moveTime = 3f;
+        [SerializeField] GameObject _floatingPlatform;
 
         private int _currentWaypoint = 0;
         private int _nextWaypoint = 1;
         private bool _isRunning = false;
+        private bool _isResetting = true;
         private WaitForSeconds _waitTimeYield;
         private WaitForEndOfFrame _waitEOFYield = new WaitForEndOfFrame();
+        private Coroutine _moveRoutine;
+        [SerializeField] private Player _player;
 
         private void Start()
         {
@@ -25,43 +29,110 @@ namespace WeenieWalker
             _waypoints.ForEach(t => { t.TryGetComponent<Renderer>(out Renderer rend); rend.enabled = false; });
 
             _waitTimeYield = new WaitForSeconds(_waitTimeAtLocation);
+
+            Reset();
         }
 
         public override void Interact()
         {
-            
+
+            if (_isRunning)
+            {
+                _isRunning = false;
+                if(_moveRoutine != null)
+                   StopCoroutine(_moveRoutine);
+            }
+            else
+            {
+                _isRunning = true;
+                Invoke("MoveToNextPosition", 1f);
+            }
+
         }
 
         public override void Reset()
         {
-            transform.position = _waypoints[0].position;
-            transform.rotation = _waypoints[0].rotation;
+            if (_moveRoutine != null)
+                StopCoroutine(_moveRoutine);
 
+            _isRunning = false;
+
+            if (_isResetting)
+            {
+                _floatingPlatform.transform.position = _waypoints[0].position;
+                _currentWaypoint = 0;
+                _nextWaypoint = ReturnWaypointID(_currentWaypoint + 1);
+            }
+        }
+
+
+        private void MoveToNextPosition()
+        {
+            if (_isRunning)
+                _moveRoutine = StartCoroutine(LerpToPosition(_floatingPlatform.transform.position, _waypoints[_nextWaypoint].position, _moveTime));
         }
 
         IEnumerator LerpToPosition(Vector3 moveToStart, Vector3 moveToEnd, float timeToTake)
         {
+            _player.Controller.enabled = false;
             float elapsedTime = 0;
 
             while(elapsedTime < timeToTake)
             {
-                transform.position = Vector3.Lerp(moveToStart, moveToEnd, elapsedTime/timeToTake);
+                //Move platform
+                _floatingPlatform.transform.position = Vector3.Lerp(moveToStart, moveToEnd, elapsedTime/timeToTake);
+
+
+                //move character on the platform
+                Vector3 moveDirection = moveToEnd - _floatingPlatform.transform.position;
+
                 elapsedTime += Time.deltaTime;
+
+                //Force stop the coroutine if player dies (fighting with Reset method)
+                if(!_isRunning)
+                {
+                    if (_isResetting)
+                    {
+                        moveToStart = _waypoints[0].position;
+                        moveToEnd = _waypoints[0].position;
+                    }
+                    break;
+                }
+
+                yield return _waitEOFYield;
             }
 
             //reached destination so update waypoints
             _nextWaypoint = ReturnWaypointID(_nextWaypoint + 1);
             _currentWaypoint = ReturnWaypointID(_currentWaypoint + 1);
+            _player.Controller.enabled = true;
 
             yield return _waitTimeYield;
 
             MoveToNextPosition();
         }
 
-        private void MoveToNextPosition()
+        private void OnTriggerEnter(Collider other)
         {
-            StartCoroutine(LerpToPosition(_waypoints[_currentWaypoint].position, _waypoints[_nextWaypoint].position, _moveTime));
+            if (other.gameObject.CompareTag("Player"))
+            {
+                _player = other.gameObject.GetComponent<Player>();
+                _player.transform.parent = this.transform;   
+            }
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                if (_player != null)
+                {
+                    _player.transform.parent = null;
+                    _player = null;
+                }
+            }
+        }
+
 
         private int ReturnWaypointID(int toTest)
         {

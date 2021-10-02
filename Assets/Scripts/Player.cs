@@ -11,6 +11,7 @@ namespace WeenieWalker
         [SerializeField] private float _jumpHeight = 3f;
         [SerializeField] private float _fallMultiplier = 0.5f;
         [SerializeField] CharacterController _controller;
+        public CharacterController Controller { get { return _controller; } }
 
         //Make adjustable gravity
         [SerializeField] private float _gravity = -9.81f;
