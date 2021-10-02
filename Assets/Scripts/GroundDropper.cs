@@ -69,7 +69,6 @@ namespace WeenieWalker
 
         private void Reset()
         {
-            Debug.Log("Cube needs to go back");
             transform.position = startPos;
 
             RandomizeDropTime();
