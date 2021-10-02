@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6111753936641571942}
-  - component: {fileID: 6111753936641571941}
-  - component: {fileID: 6111753936641571940}
+  - component: {fileID: 6770330215004721256}
+  - component: {fileID: 8336755652233063320}
   - component: {fileID: 6111753936641571939}
   - component: {fileID: 6111753936641571938}
-  - component: {fileID: 1252253758417444107}
+  - component: {fileID: 3088640773317241683}
   m_Layer: 0
   m_Name: GroundCube
   m_TagString: Ground
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6111753936641571941
+--- !u!33 &6770330215004721256
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6111753936641571937}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6111753936641571940
+--- !u!23 &8336755652233063320
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,15 +102,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6111753936641571937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 285ba8ea772588247b8bdab78a2b20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _groundDefaultDropAmount: 2
-  _timingRange: 5
-  _anim: {fileID: 1252253758417444107}
---- !u!95 &1252253758417444107
+  _timingRange: 5.7
+  _anim: {fileID: 3088640773317241683}
+--- !u!95 &3088640773317241683
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
