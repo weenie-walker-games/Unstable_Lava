@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_Lava
+  m_Shader: {fileID: -6465566751694194690, guid: 0022c927a7b55654499fc6cc4b579cbf,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - Vector1_2FBA0D38: 1
+    - Vector1_4C086CD0: 100
+    - Vector1_88B96FF8: 3
+    - Vector1_C2A10890: 0.1
+    - Vector1_F9086030: 0.25
+    m_Colors:
+    - Color_4B79E855: {r: 0.9433962, g: 0, b: 0, a: 1}
+    - Color_8C9A329A: {r: 0.26415092, g: 0.25156882, b: 0.13581344, a: 1}
+    - Color_D93769FA: {r: 1, g: 0.53926516, b: 0, a: 1}
+    - Vector2_1ABBAC8F: {r: 0.1, g: 0, b: 0, a: 0}
+    - Vector2_A446F5D1: {r: 0.01, g: 0, b: 0, a: 0}
