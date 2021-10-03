@@ -6,6 +6,9 @@ namespace WeenieWalker
 {
     public abstract class InteractedItems : MonoBehaviour, IInteractable
     {
+        [SerializeField] AudioSource _audioSource;
+        [SerializeField] AudioClip _clip;
+
         protected virtual void OnEnable()
         {
             GameManager.OnResetLevel += Reset;
@@ -21,5 +24,12 @@ namespace WeenieWalker
         public abstract void Interact();
 
         public abstract void Reset();
+
+
+        protected void PlayAudio()
+        {
+            if (_clip != null && _audioSource != null)
+                _audioSource.PlayOneShot(_clip);
+        }
     }
 }

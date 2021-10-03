@@ -28,6 +28,7 @@ namespace WeenieWalker
         protected override void DoOtherInteractionEffects()
         {
             _isActive = !_isActive;
+            PlayAudio();
             _anim.SetTrigger("Interact");
             Material toMat = _isActive ?  _usedColor : _startColor;
             ChangeMaterial(toMat);

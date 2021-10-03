@@ -13,6 +13,9 @@ namespace WeenieWalker
         [SerializeField] protected float _timerCooldown = 5f;
         [SerializeField] protected Collider _collider;
 
+        [SerializeField] AudioSource _audioSource;
+        [SerializeField] AudioClip _clip;
+
         protected bool _hasBeenTriggered = false;       //for one time use objects
         protected bool _isPlayerInRange = false;        //to store if player is close enough to interact
         private Coroutine _listenForInput;
@@ -118,5 +121,11 @@ namespace WeenieWalker
         protected abstract void DoOtherInteractionEffects();
         protected abstract void DoOtherResetEffects();
 
+
+        protected void PlayAudio()
+        {
+            if (_clip != null && _audioSource != null)
+                _audioSource.PlayOneShot(_clip);
+        }
     }
 }

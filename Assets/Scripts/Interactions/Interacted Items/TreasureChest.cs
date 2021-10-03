@@ -14,6 +14,7 @@ namespace WeenieWalker
         public override void Interact()
         {
             _anim.SetTrigger("Interact");
+            PlayAudio();
             OnTreasureChestOpen?.Invoke(_treasureValue);
         }
 
