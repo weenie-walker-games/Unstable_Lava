@@ -13,6 +13,7 @@ namespace WeenieWalker
         [Tooltip("The time it takes the platform to reach the next location")]
         [SerializeField] protected float _moveTime = 3f;
         [SerializeField] GameObject _floatingPlatform;
+        [SerializeField] bool _isOneUseOnly = false;
 
         private int _currentWaypoint = 0;
         private int _nextWaypoint = 1;
@@ -21,7 +22,6 @@ namespace WeenieWalker
         private WaitForSeconds _waitTimeYield;
         private WaitForEndOfFrame _waitEOFYield = new WaitForEndOfFrame();
         private Coroutine _moveRoutine;
-        [SerializeField] private Player _player;
 
         private void Start()
         {
@@ -38,9 +38,12 @@ namespace WeenieWalker
 
             if (_isRunning)
             {
-                _isRunning = false;
-                if(_moveRoutine != null)
-                   StopCoroutine(_moveRoutine);
+                if (!_isOneUseOnly)
+                {
+                    _isRunning = false;
+                    if (_moveRoutine != null)
+                        StopCoroutine(_moveRoutine);
+                }
             }
             else
             {
@@ -74,22 +77,18 @@ namespace WeenieWalker
 
         IEnumerator LerpToPosition(Vector3 moveToStart, Vector3 moveToEnd, float timeToTake)
         {
-            _player.Controller.enabled = false;
+
             float elapsedTime = 0;
 
-            while(elapsedTime < timeToTake)
+            while (elapsedTime < timeToTake)
             {
                 //Move platform
-                _floatingPlatform.transform.position = Vector3.Lerp(moveToStart, moveToEnd, elapsedTime/timeToTake);
-
-
-                //move character on the platform
-                Vector3 moveDirection = moveToEnd - _floatingPlatform.transform.position;
+                _floatingPlatform.transform.position = Vector3.Lerp(moveToStart, moveToEnd, elapsedTime / timeToTake);
 
                 elapsedTime += Time.deltaTime;
 
                 //Force stop the coroutine if player dies (fighting with Reset method)
-                if(!_isRunning)
+                if (!_isRunning)
                 {
                     if (_isResetting)
                     {
@@ -103,33 +102,32 @@ namespace WeenieWalker
             }
 
             //reached destination so update waypoints
+
             _nextWaypoint = ReturnWaypointID(_nextWaypoint + 1);
             _currentWaypoint = ReturnWaypointID(_currentWaypoint + 1);
-            _player.Controller.enabled = true;
+
 
             yield return _waitTimeYield;
 
-            MoveToNextPosition();
+            if (!_isOneUseOnly)
+            {
+                MoveToNextPosition();
+            }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Obstacle"))
             {
-                _player = other.gameObject.GetComponent<Player>();
-                _player.transform.parent = this.transform;   
+
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Obstacle"))
             {
-                if (_player != null)
-                {
-                    _player.transform.parent = null;
-                    _player = null;
-                }
+
             }
         }
 

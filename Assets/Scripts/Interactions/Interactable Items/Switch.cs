@@ -6,18 +6,18 @@ namespace WeenieWalker
 {
     public class Switch : InteractableItems
     {
-
-        [SerializeField] Color _usedColor = Color.black;
+        [SerializeField] private Color _startColor;
+        [SerializeField] private Color _usedColor = Color.black;
 
         [SerializeField] private Renderer _rend;
         [SerializeField] private Animator _anim;
 
-        private Color _startColor;
+
         private bool _isActive = false;
 
         private void Start()
         {
-            _startColor = _rend.material.color;
+            _rend.material.color = _startColor;
         }
 
         private void ChangeColor(Color color)

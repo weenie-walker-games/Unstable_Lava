@@ -162,6 +162,7 @@ MonoBehaviour:
   _interactionType: 0
   _timerCooldown: 5
   _collider: {fileID: 2551921833911676354}
+  _startColor: {r: 0, g: 1, b: 0, a: 1}
   _usedColor: {r: 0, g: 0, b: 0, a: 1}
   _rend: {fileID: 4604761079728683828}
   _anim: {fileID: 2551921833911676352}
