@@ -39,6 +39,7 @@ namespace WeenieWalker
         {
             _anim.SetTrigger("Interact");
             ChangeMaterial(_startColor);
+            _isActive = false;
         }
 
     }

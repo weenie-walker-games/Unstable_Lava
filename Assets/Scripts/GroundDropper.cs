@@ -20,10 +20,12 @@ namespace WeenieWalker
         private float _selectedTiming;
         private WaitForSeconds _yieldWait;
         private Vector3 startPos;
+        public  bool _isPlayerIn = false;
 
         private void OnEnable()
         {
             GameManager.OnResetLevel += Reset;
+
         }
 
         private void OnDisable()
@@ -34,7 +36,6 @@ namespace WeenieWalker
         private void Start()
         {
             startPos = this.transform.position;
-            RandomizeDropTime();
         }
 
         private void RandomizeDropTime()
@@ -47,16 +48,9 @@ namespace WeenieWalker
 
         private void StartAnimation()
         {
-            _anim.SetTrigger("Shake");
+            _anim.SetBool("Shake", true);
         }
 
-        IEnumerator DropRoutine()
-        {
-
-            yield return _yieldWait;
-
-            _anim.SetTrigger("Shake");
-        }
 
 
         /// <summary>
@@ -70,8 +64,24 @@ namespace WeenieWalker
         private void Reset()
         {
             transform.position = startPos;
-
-            RandomizeDropTime();
+            _anim.SetBool("Shake", false);
+            _anim.SetTrigger("Reset");
+            _isPlayerIn = false;
+            
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                if (!_isPlayerIn)
+                {
+                    _isPlayerIn = true;
+                    RandomizeDropTime();
+                }
+            }
+        }
+
+
     }
 }
