@@ -7,6 +7,7 @@ namespace WeenieWalker
     public class GameManager : MonoSingleton<GameManager>
     {
         public static event System.Action OnResetLevel;
+        public static event System.Action OnMainMenu;
 
         private void OnEnable()
         {
@@ -23,6 +24,15 @@ namespace WeenieWalker
 
             OnResetLevel?.Invoke();
 
+        }
+
+        private void Update()
+        {
+            //use the escape key to bring up the main menu
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                OnMainMenu?.Invoke();
+            }
         }
     }
 }
