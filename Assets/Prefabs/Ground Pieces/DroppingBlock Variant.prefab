@@ -10,8 +10,13 @@ PrefabInstance:
     - target: {fileID: 1027324963393017368, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_Name
-      value: DroppingBlock
+      value: DroppingBlock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1771338550802647042, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 38513f0e8df2dec4f9e0f50d72a9c13e, type: 2}
     - target: {fileID: 2610675046530598961, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_RootOrder
@@ -80,12 +85,17 @@ PrefabInstance:
     - target: {fileID: 4608972202455687160, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: _groundDefaultDropAmount
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4754141450000943305, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254644391390692235, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9, type: 3}

@@ -19,6 +19,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8980939303811240773, guid: 5f0568984606b8148a5527e27bfc291a,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8980939303811240773, guid: 5f0568984606b8148a5527e27bfc291a,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -30,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 8980939303811240773, guid: 5f0568984606b8148a5527e27bfc291a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8980939303811240773, guid: 5f0568984606b8148a5527e27bfc291a,
         type: 3}
@@ -79,8 +84,13 @@ PrefabInstance:
     - target: {fileID: 1027324963393017368, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_Name
-      value: SlidingDoorBlock
+      value: SlidingDoorBlock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1771338550802647042, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79d187fc6eda16a48943a74cdfd20ddc, type: 2}
     - target: {fileID: 2610675046530598961, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_RootOrder

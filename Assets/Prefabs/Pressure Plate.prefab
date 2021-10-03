@@ -110,6 +110,6 @@ MonoBehaviour:
   _interactionType: 0
   _timerCooldown: 5
   _collider: {fileID: 7029342906893353216}
-  _startColor: {fileID: 2100000, guid: 53e271c7953e62b44949cffd8d22d3f6, type: 2}
+  _startColor: {fileID: 2100000, guid: 38513f0e8df2dec4f9e0f50d72a9c13e, type: 2}
   _usedColor: {fileID: 2100000, guid: eec1181b36d3d3842bb47a8069668199, type: 2}
   _rend: {fileID: 7029342906893353217}

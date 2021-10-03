@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 1032204759082185173, guid: a09a3514a52ae174dbd5f326d956826d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.36
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1032204759082185173, guid: a09a3514a52ae174dbd5f326d956826d,
         type: 3}
@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExitBlock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1771338550802647042, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53e271c7953e62b44949cffd8d22d3f6, type: 2}
     - target: {fileID: 2610675046530598961, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_RootOrder

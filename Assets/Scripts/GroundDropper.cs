@@ -42,7 +42,6 @@ namespace WeenieWalker
         {
             _selectedTiming = Random.Range(0, _timingRange);
             _yieldWait = new WaitForSeconds(_groundDefaultDropAmount + _selectedTiming);
-            
             Invoke("StartAnimation", _groundDefaultDropAmount + _selectedTiming);
         }
 
@@ -72,10 +71,13 @@ namespace WeenieWalker
 
         private void OnTriggerEnter(Collider other)
         {
+
             if (other.gameObject.CompareTag("Player"))
             {
+
                 if (!_isPlayerIn)
                 {
+
                     _isPlayerIn = true;
                     RandomizeDropTime();
                 }
