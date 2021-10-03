@@ -21,6 +21,7 @@ namespace WeenieWalker
         {
             GameManager.OnResetLevel += Reset;
             GameManager.OnMainMenu += ShowMainMenu;
+            ExitZone.OnPlayerReachExit += EndLevel;
 
             _player.SetActive(false);
         }
@@ -29,20 +30,29 @@ namespace WeenieWalker
         {
             GameManager.OnResetLevel -= Reset;
             GameManager.OnMainMenu -= ShowMainMenu;
+            ExitZone.OnPlayerReachExit -= EndLevel;
         }
 
         private void ShowMainMenu()
         {
-            _player.SetActive(false);
-            _levels[_currentLevel].SetActive(false);
-            _lava.SetActive(false);
+            MenusClosed(false);
         }
 
         public void ResumeGame()
         {
-            _player.SetActive(true);
-            _levels[_currentLevel].SetActive(true);
-            _lava.SetActive(true);
+            MenusClosed(true);
+        }
+
+        private void MenusClosed(bool isMenuDisabled)
+        {
+            _player.SetActive(isMenuDisabled);
+            _levels[_currentLevel].SetActive(isMenuDisabled);
+            _lava.SetActive(isMenuDisabled);
+        }
+
+        private void EndLevel()
+        {
+            MenusClosed(false);
         }
 
         private void Start()
@@ -52,7 +62,7 @@ namespace WeenieWalker
 
         private void BeginLevel()
         {
-            _player.SetActive(true);
+            MenusClosed(true);
             Reset();
         }
 
@@ -65,7 +75,6 @@ namespace WeenieWalker
         public void LevelSelected(int levelNum)
         {
             _levels.ForEach(t => t.SetActive(false));
-            _levels[levelNum].SetActive(true);
             _currentLevel = levelNum;
             BeginLevel(); 
         }

@@ -20,12 +20,14 @@ namespace WeenieWalker
         {
             TreasureChest.OnTreasureChestOpen += UpdateScore;
             GameManager.OnMainMenu += ShowMainMenu;
+            ExitZone.OnPlayerReachExit += ShowLevels;
         }
 
         private void OnDisable()
         {
             TreasureChest.OnTreasureChestOpen -= UpdateScore;
             GameManager.OnMainMenu -= ShowMainMenu;
+            ExitZone.OnPlayerReachExit -= ShowLevels;
         }
 
         private void ShowMainMenu()
@@ -33,6 +35,10 @@ namespace WeenieWalker
             _mainMenu.SetActive(true);
         }
 
+        private void ShowLevels()
+        {
+            _levelSelectCanvas.SetActive(true);
+        }
 
 
         private void Start()

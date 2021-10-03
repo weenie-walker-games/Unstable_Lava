@@ -86,11 +86,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LiftingDoorBlock Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1771338550802647042, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 79d187fc6eda16a48943a74cdfd20ddc, type: 2}
     - target: {fileID: 2610675046530598961, guid: 7cd51e9cbe602f545b95e5b3baf1a2e9,
         type: 3}
       propertyPath: m_RootOrder
