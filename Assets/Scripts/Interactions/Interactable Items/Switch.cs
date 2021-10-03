@@ -6,8 +6,8 @@ namespace WeenieWalker
 {
     public class Switch : InteractableItems
     {
-        [SerializeField] private Color _startColor;
-        [SerializeField] private Color _usedColor = Color.black;
+        [SerializeField] private Material _startColor;
+        [SerializeField] private Material _usedColor;
 
         [SerializeField] private Renderer _rend;
         [SerializeField] private Animator _anim;
@@ -17,20 +17,20 @@ namespace WeenieWalker
 
         private void Start()
         {
-            _rend.material.color = _startColor;
+            _rend.material = _startColor;
         }
 
-        private void ChangeColor(Color color)
+        private void ChangeMaterial(Material mat)
         {
-            _rend.material.color = color;
+            _rend.material = mat;
         }
 
         protected override void DoOtherInteractionEffects()
         {
             _isActive = !_isActive;
             _anim.SetTrigger("Interact");
-            Color toColor = _isActive ?  _usedColor : _startColor;
-            ChangeColor(toColor);
+            Material toMat = _isActive ?  _usedColor : _startColor;
+            ChangeMaterial(toMat);
 
 
         }
@@ -38,7 +38,7 @@ namespace WeenieWalker
         protected override void DoOtherResetEffects()
         {
             _anim.SetTrigger("Interact");
-            ChangeColor(_startColor);
+            ChangeMaterial(_startColor);
         }
 
     }

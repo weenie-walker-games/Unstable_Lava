@@ -162,8 +162,8 @@ MonoBehaviour:
   _interactionType: 0
   _timerCooldown: 5
   _collider: {fileID: 2551921833911676354}
-  _startColor: {r: 0, g: 1, b: 0, a: 1}
-  _usedColor: {r: 0, g: 0, b: 0, a: 1}
+  _startColor: {fileID: 2100000, guid: 38513f0e8df2dec4f9e0f50d72a9c13e, type: 2}
+  _usedColor: {fileID: 2100000, guid: eec1181b36d3d3842bb47a8069668199, type: 2}
   _rend: {fileID: 4604761079728683828}
   _anim: {fileID: 2551921833911676352}
 --- !u!1 &2967651148110979861

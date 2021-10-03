@@ -6,32 +6,33 @@ namespace WeenieWalker
 {
     public class PressurePlate : InteractableItems
     {
-        [SerializeField] Color _usedColor = Color.black;
+        [SerializeField] private Material _startColor;
+        [SerializeField] private Material _usedColor;
 
         [SerializeField] private Renderer _rend;
 
-        private Color _startColor;
+        private bool _isActive = false;
 
         private void Start()
         {
-            _startColor = _rend.material.color;
+            _rend.material = _startColor;
         }
 
         protected override void DoOtherInteractionEffects()
         {
-
-            Color toColor = _isUsedDuringReversible ? _startColor : _usedColor;
-            ChangeColor(toColor);
+            _isActive = !_isActive;
+            Material toMat = _isActive ? _usedColor : _startColor;
+            ChangeMaterial(toMat);
         }
 
         protected override void DoOtherResetEffects()
         {
-            ChangeColor(_startColor);
+            ChangeMaterial(_startColor);
         }
 
-        private void ChangeColor(Color color)
+        private void ChangeMaterial(Material mat)
         {
-            _rend.material.color = color;
+            _rend.material = mat;
         }
 
     }
